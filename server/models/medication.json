@@ -2,14 +2,15 @@
   "name": "Medication",
   "plural": "Medications",
   "base": "PersistedModel",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "properties": {
     "Name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "id": true
     }
   },
   "validations": [],
