@@ -1,1 +1,7 @@
-{}
+{
+  "mongo": {
+    "name": "mongo",
+    "connector": "mongodb",
+    "port": 27017
+  }
+}
