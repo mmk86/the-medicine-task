@@ -2,6 +2,7 @@
 
 ## Prerequisities
 * `browserify`
+* A `MongoDB` instance listening on port `27017`.
 * Note that this has been developed and tested on `Node.js 5.0`.
 
 ## Starting the server
