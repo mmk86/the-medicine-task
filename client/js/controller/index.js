@@ -23,6 +23,12 @@ function controller($scope, Restangular) {
     $scope.$apply();
   }
 
+  function restError(err) {
+    vm.result = "Error: " + err.data.error.message;
+    vm.showResult = true;
+    vm.showFetchCount = false;
+  }
+
   function add() {
     medications.post({Name: vm.name})
     .then(function () {
@@ -30,11 +36,7 @@ function controller($scope, Restangular) {
       vm.showResult = true;
       vm.showFetchCount = false;
     })
-    .catch(function () {
-      vm.result = "Error adding medication: " + vm.name;
-      vm.showResult = true;
-      vm.showFetchCount = false;
-    });
+    .catch(restError);
   }
 
   function get() {
@@ -50,11 +52,7 @@ function controller($scope, Restangular) {
       firebaseChild = firebaseRef.child(name);
       firebaseChild.on("value", updateMedicationCount);
     })
-    .catch(function () {
-      vm.result = "Error: " + err.data.error.message;
-      vm.showResult = true;
-      vm.showFetchCount = false;
-    });
+    .catch(restError);
   }
 
   vm.add = add;

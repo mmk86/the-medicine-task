@@ -33,4 +33,16 @@ module.exports = function(Medication) {
     }
   });
 
+  Medication.afterRemoteError("create", function (ctx, next) {
+    const name = ctx.req.body.Name;
+    Medication.exists(name, function(err, exists) {
+      if (exists) {
+        next(new Error(`The medication "${name}" already exists`));
+      } else {
+        next();
+      }
+    });
+
+  });
+
 };
