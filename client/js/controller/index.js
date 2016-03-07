@@ -25,25 +25,33 @@ function controller($scope, Restangular) {
   }
 
   function add() {
-    vm.showResult = false;
-    vm.showFetchCount = false;
+    medications.post({Name: vm.name})
+    .then(function () {
+      vm.result = "Successfully added medication: " + vm.name;
+      vm.showResult = true;
+      vm.showFetchCount = false;
+    })
+    .catch(function () {
+      vm.result = "Error adding medication: " + vm.name;
+      vm.showResult = true;
+      vm.showFetchCount = false;
+    });
   }
 
   function get() {
     medications.one(vm.name).get()
     .then(function (medication) {
-      console.log(medication);
       var name = medication.Name;
       vm.result = "Fetched: " + name;
       vm.showResult = true;
       vm.showFetchCount = true;
       if (firebaseChild) {
-        firebaseChild.off("value", updateMedificationCount);
+        firebaseChild.off("value", updateMedicationCount);
       }
       firebaseChild = firebaseRef.child(name);
       firebaseChild.on("value", updateMedicationCount);
     })
-    .catch(function (err) {
+    .catch(function () {
       vm.result = "Error: " + err.data.error.message;
       vm.showResult = true;
       vm.showFetchCount = false;
