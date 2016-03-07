@@ -21,7 +21,6 @@ function controller($scope, Restangular) {
       vm.count = snapshot.val();
     }
     $scope.$apply();
-    console.log(snapshot.val());
   }
 
   function add() {
