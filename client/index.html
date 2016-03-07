@@ -5,7 +5,10 @@
     <title>The medicine task</title>
   </head>
   <body ng-controller="controller as ctrl">
-    <p>Nothing interesting here...</p>
+    <h1>The medicine task</h1>
+    <p>
+      Use the controls below to add or fetch a medication.
+    </p>
     <input type="text" ng-model="ctrl.name">
     <button ng-click="ctrl.add()">Add</button>
     <button ng-click="ctrl.get()">Get</button>
