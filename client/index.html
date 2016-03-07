@@ -1,10 +1,20 @@
 <!DOCTYPE HTML>
 
-<html>
+<html ng-app="theMedicineTask">
   <head>
     <title>The medicine task</title>
   </head>
-  <body>
+  <body ng-controller="controller as ctrl">
     <p>Nothing interesting here...</p>
+    <input type="text" ng-model="ctrl.name">
+    <button ng-click="ctrl.add()">Add</button>
+    <button ng-click="ctrl.get()">Get</button>
+    <p ng-if="ctrl.showResult">
+      {{ctrl.result}}
+    </p>
+    <p ng-if="ctrl.showFetchCount">
+      This medication has been fetched {{ctrl.count}} time(s).
+    </p>
+    <script src="dist/app.js"></script>
   </body>
 </html>

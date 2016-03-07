@@ -8,6 +8,7 @@
     "posttest": "nsp check"
   },
   "dependencies": {
+    "angular": "^1.5.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "firebase": "^2.4.1",
@@ -18,6 +19,7 @@
     "loopback-component-explorer": "^2.1.0",
     "loopback-connector-mongodb": "^1.13.3",
     "loopback-datasource-juggler": "^2.39.0",
+    "restangular-browserify": "^1.5.4",
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
