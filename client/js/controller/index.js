@@ -10,42 +10,51 @@ function controller($scope, Restangular) {
   var firebaseChild;
 
   var vm = this;
-  vm.name = "";
-  vm.count = 0;
-  vm.showResult = false;
-  vm.result = "";
-  vm.showFetchCount = false;
+  vm.med = {
+    name: "",
+    count: 0,
+    show: false
+  };
+  vm.status = {
+    show: false,
+    isError: false,
+    title: "",
+    message: ""
+  };
 
   function updateMedicationCount(snapshot) {
     if (snapshot.exists()) {
-      vm.count = snapshot.val();
+      vm.med.count = snapshot.val();
     }
     $scope.$apply();
   }
 
   function restError(err) {
-    vm.result = "Error: " + err.data.error.message;
-    vm.showResult = true;
-    vm.showFetchCount = false;
+    vm.status.isError = true;
+    vm.status.title = "Error";
+    vm.status.message = err.data.error.message;
+    vm.status.show = true;
+    vm.med.show = false;
   }
 
   function add() {
-    medications.post({Name: vm.name})
+    medications.post({Name: vm.med.name})
     .then(function () {
-      vm.result = "Successfully added medication: " + vm.name;
-      vm.showResult = true;
-      vm.showFetchCount = false;
+      vm.status.isError = false;
+      vm.status.message = "Added medication: " + vm.med.name;
+      vm.status.title = "Success";
+      vm.status.show = true;
+      vm.med.show = false;
     })
     .catch(restError);
   }
 
   function get() {
-    medications.one(vm.name).get()
+    medications.one(vm.med.name).get()
     .then(function (medication) {
       var name = medication.Name;
-      vm.result = "Fetched: " + name;
-      vm.showResult = true;
-      vm.showFetchCount = true;
+      vm.med.show = true;
+      vm.status.show = false;
       if (firebaseChild) {
         firebaseChild.off("value", updateMedicationCount);
       }

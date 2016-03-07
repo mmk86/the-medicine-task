@@ -2,22 +2,56 @@
 
 <html ng-app="theMedicineTask">
   <head>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>The medicine task</title>
   </head>
   <body ng-controller="controller as ctrl">
-    <h1>The medicine task</h1>
-    <p>
-      Use the controls below to add or fetch a medication.
-    </p>
-    <input type="text" ng-model="ctrl.name">
-    <button ng-click="ctrl.add()">Add</button>
-    <button ng-click="ctrl.get()">Get</button>
-    <p ng-if="ctrl.showResult">
-      {{ctrl.result}}
-    </p>
-    <p ng-if="ctrl.showFetchCount">
-      This medication has been fetched {{ctrl.count}} time(s).
-    </p>
+    <div class="w3-container w3-margin-top w3-row-padding">
+      <div class="w3-quarter">
+        <div class="w3-card">
+          <header class="w3-container w3-blue">
+            <h1>The medicine task</h1>
+          </header>
+          <p>
+            <form class="w3-container">
+              <label>Medication name:</label>
+              <input type="text" class="w3-input" ng-model="ctrl.med.name"><br/>
+              <button class="w3-btn w3-blue" ng-click="ctrl.add()">Add</button>
+              <button class="w3-btn w3-blue" ng-click="ctrl.get()">Get</button>
+            </form>
+          </p>
+        </div>
+      </div>
+
+      <div class="w3-quarter" ng-if="ctrl.med.show">
+        <div class="w3-card">
+          <header class="w3-container w3-blue">
+            <h1>{{ctrl.med.name}}</h1>
+          </header>
+          <div class="w3-container">
+            <p>
+              Fetched {{ctrl.med.count}} time(s).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="w3-quarter" ng-if="ctrl.status.show">
+        <div class="w3-card">
+          <header ng-class="['w3-container', {'w3-red': ctrl.status.isError, 'w3-green': !ctrl.status.isError}]">
+            <h1>{{ctrl.status.title}}</h1>
+          </header>
+          <div class="w3-container">
+            <p>
+              {{ctrl.status.message}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
     <script src="dist/app.js"></script>
   </body>
 </html>
