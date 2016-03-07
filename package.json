@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server/server.js",
   "scripts": {
-    "start": "node .",
+    "start": "mkdir -p client/dist && browserify -o client/dist/app.js -e client/js/app.js && node .",
     "pretest": "jshint .",
     "posttest": "nsp check"
   },
